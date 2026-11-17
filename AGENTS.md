@@ -28,3 +28,11 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project rules (Canteeno)
+
+- All app data lives in one zustand store (`src/store/app-store.ts`, persisted to localStorage, hydrated after mount in `__root.tsx`); store actions are the seam to swap for API calls later — keep pages calling actions, not mutating data directly.
+- Business rules (cart totals, add-to-cart checks, order status flow, prep estimate, order numbers) live as pure functions in `src/lib/order-logic.ts` with tests beside them; change rules there, not in components.
+- Zustand selectors must return existing references or primitives — never `.filter`/`.map` inside `useApp(selector)` (causes infinite re-render); derive after selecting.
+- Student pages sit under the pathless `_student` layout (header/footer); `/staff/*` and `/admin/*` use `DashboardShell` behind a demo `RoleGate`.
+- Render dates only through `TimeText` (client-only) to avoid server/browser time-zone hydration mismatches.
