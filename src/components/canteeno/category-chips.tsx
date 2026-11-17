@@ -6,7 +6,7 @@ import { CategoryIcon } from "./category-icon";
 
 /** Large image chips used on the home page — each links to search filtered by category. */
 export function CategoryRail() {
-  const categories = useApp((s) => s.categories.filter((c) => c.active));
+  const categories = useApp((s) => s.categories).filter((c) => c.active);
   return (
     <div className="scrollbar-none -mx-4 flex gap-3 overflow-x-auto px-4 pb-2 sm:mx-0 sm:px-0">
       {categories.map((c) => (
@@ -44,7 +44,7 @@ export function CategoryToggleChips({
   ids?: string[];
   className?: string;
 }) {
-  const categories = useApp((s) => s.categories.filter((c) => c.active && (!ids || ids.includes(c.id))));
+  const categories = useApp((s) => s.categories).filter((c) => c.active && (!ids || ids.includes(c.id)));
   const chip = (active: boolean) =>
     cn(
       "inline-flex shrink-0 cursor-pointer items-center gap-1.5 rounded-full border px-3.5 py-2 text-sm font-semibold transition-colors",
