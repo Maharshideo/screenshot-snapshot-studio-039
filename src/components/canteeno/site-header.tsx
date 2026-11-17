@@ -26,7 +26,7 @@ export function SearchBox({ className, autoFocus }: { className?: string; autoFo
       className={cn("relative", className)}
       onSubmit={(e) => {
         e.preventDefault();
-        navigate({ to: "/search", search: { q: q.trim() || undefined } });
+        navigate({ to: "/search", search: q.trim() ? { q: q.trim() } : {} });
       }}
     >
       <Search className="pointer-events-none absolute left-3.5 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
@@ -36,7 +36,7 @@ export function SearchBox({ className, autoFocus }: { className?: string; autoFo
         autoFocus={autoFocus}
         placeholder="Search Maggi, coffee, Surya…"
         aria-label="Search food and canteens"
-        className="h-11 w-full rounded-full border border-input bg-card pl-10 pr-4 text-sm shadow-soft outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/15"
+        className="h-11 w-full rounded-full border border-input bg-card pl-10 pr-4 text-sm text-foreground placeholder:text-muted-foreground shadow-soft outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/15"
       />
     </form>
   );

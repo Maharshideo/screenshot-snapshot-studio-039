@@ -91,7 +91,7 @@ describe("order numbers", () => {
   it("never reuses an existing order number", () => {
     let i = 0;
     const seq = [0.1, 0.1, 0.5];
-    const n = generateOrderNumber("NC", ["CN-NC-1900"], () => seq[i++]);
+    const n = generateOrderNumber("NC", ["CN-NC-1900"], () => seq[i++] ?? 0);
     expect(n).toBe("CN-NC-5500");
   });
 });

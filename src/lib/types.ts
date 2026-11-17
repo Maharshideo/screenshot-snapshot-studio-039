@@ -48,8 +48,8 @@ export interface FoodItem {
   prepTime: number;
   inStock: boolean; // false => visible but "Out of stock"
   available: boolean; // false => hidden from the student menu
-  popular?: boolean;
-  recommended?: boolean;
+  popular?: boolean | undefined;
+  recommended?: boolean | undefined;
   rating: number;
 }
 
@@ -98,8 +98,8 @@ export interface Order {
   paymentMethod: PaymentMethod;
   placedAt: string; // ISO
   history: { status: OrderStatus; at: string }[];
-  reason?: string; // reject / cancel reason
-  reviewed?: boolean;
+  reason?: string | undefined; // reject / cancel reason
+  reviewed?: boolean | undefined;
 }
 
 export interface Student {
@@ -123,7 +123,7 @@ export interface AppNotification {
   body: string;
   at: string;
   read: boolean;
-  orderId?: ID;
+  orderId?: ID | undefined;
   kind: "order" | "offer" | "system";
 }
 
@@ -132,12 +132,12 @@ export interface Review {
   userId: ID;
   studentName: string;
   canteenId: ID;
-  orderId?: ID;
+  orderId?: ID | undefined;
   rating: number;
   comment: string;
   at: string;
   status: "published" | "flagged" | "hidden";
-  reply?: string;
+  reply?: string | undefined;
 }
 
 export interface PlatformSettings {

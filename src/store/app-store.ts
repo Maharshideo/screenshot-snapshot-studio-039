@@ -78,20 +78,20 @@ interface Actions {
   setOrderStatus: (orderId: string, status: OrderStatus, reason?: string) => boolean;
   setOrderPrep: (orderId: string, minutes: number) => void;
   // menu
-  upsertFood: (food: Omit<FoodItem, "id"> & { id?: string }) => FoodItem;
+  upsertFood: (food: Omit<FoodItem, "id"> & { id?: string | undefined }) => FoodItem;
   deleteFood: (foodId: string) => void;
   patchFood: (foodId: string, patch: Partial<FoodItem>) => void;
   // categories
-  upsertCategory: (cat: Omit<Category, "id"> & { id?: string }) => void;
+  upsertCategory: (cat: Omit<Category, "id"> & { id?: string | undefined }) => void;
   deleteCategory: (id: string) => { ok: boolean; error?: string };
   // canteens
-  upsertCanteen: (c: Omit<Canteen, "id" | "isDemo"> & { id?: string }) => Canteen;
+  upsertCanteen: (c: Omit<Canteen, "id" | "isDemo"> & { id?: string | undefined }) => Canteen;
   patchCanteen: (id: string, patch: Partial<Canteen>) => void;
   deleteCanteen: (id: string) => void;
   // students
   setStudentStatus: (id: string, status: Student["status"]) => void;
   // reviews
-  addReview: (input: { canteenId: string; orderId?: string; rating: number; comment: string }) => void;
+  addReview: (input: { canteenId: string; orderId?: string | undefined; rating: number; comment: string }) => void;
   patchReview: (id: string, patch: Partial<Review>) => void;
   // notifications
   markNotificationRead: (id: string) => void;

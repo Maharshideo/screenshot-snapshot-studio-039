@@ -24,7 +24,7 @@ export function isActive(status: OrderStatus) {
 export function nextStatus(status: OrderStatus): OrderStatus | null {
   const i = ORDER_FLOW.indexOf(status);
   if (i === -1 || i === ORDER_FLOW.length - 1) return null;
-  return ORDER_FLOW[i + 1];
+  return ORDER_FLOW[i + 1] ?? null;
 }
 
 export function canTransition(from: OrderStatus, to: OrderStatus): boolean {

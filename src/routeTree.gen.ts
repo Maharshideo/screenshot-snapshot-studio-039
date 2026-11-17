@@ -10,12 +10,57 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as StudentRouteImport } from './routes/_student'
+import { Route as AdminRouteImport } from './routes/admin'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as SignupRouteImport } from './routes/signup'
+import { Route as StaffRouteImport } from './routes/staff'
 import { Route as StudentIndexRouteImport } from './routes/_student.index'
+import { Route as StudentCartRouteImport } from './routes/_student.cart'
+import { Route as StudentCheckoutRouteImport } from './routes/_student.checkout'
+import { Route as StudentFavouritesRouteImport } from './routes/_student.favourites'
+import { Route as StudentNotificationsRouteImport } from './routes/_student.notifications'
+import { Route as StudentProfileRouteImport } from './routes/_student.profile'
 import { Route as StudentSearchRouteImport } from './routes/_student.search'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as AdminCanteensRouteImport } from './routes/admin.canteens'
+import { Route as AdminCategoriesRouteImport } from './routes/admin.categories'
+import { Route as AdminOrdersRouteImport } from './routes/admin.orders'
+import { Route as AdminReviewsRouteImport } from './routes/admin.reviews'
+import { Route as AdminSettingsRouteImport } from './routes/admin.settings'
+import { Route as AdminStudentsRouteImport } from './routes/admin.students'
+import { Route as StaffIndexRouteImport } from './routes/staff.index'
+import { Route as StaffAnalyticsRouteImport } from './routes/staff.analytics'
+import { Route as StaffMenuRouteImport } from './routes/staff.menu'
+import { Route as StaffOrdersRouteImport } from './routes/staff.orders'
+import { Route as StaffSettingsRouteImport } from './routes/staff.settings'
 import { Route as StudentCanteensIndexRouteImport } from './routes/_student.canteens.index'
+import { Route as StudentCanteensCanteenIdRouteImport } from './routes/_student.canteens.$canteenId'
+import { Route as StudentOrderConfirmedOrderIdRouteImport } from './routes/_student.order-confirmed.$orderId'
+import { Route as StudentOrdersIndexRouteImport } from './routes/_student.orders.index'
+import { Route as StudentOrdersOrderIdRouteImport } from './routes/_student.orders.$orderId'
 
 const StudentRoute = StudentRouteImport.update({
   id: '/_student',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SignupRoute = SignupRouteImport.update({
+  id: '/signup',
+  path: '/signup',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StaffRoute = StaffRouteImport.update({
+  id: '/staff',
+  path: '/staff',
   getParentRoute: () => rootRouteImport,
 } as any)
 const StudentIndexRoute = StudentIndexRouteImport.update({
@@ -23,49 +68,312 @@ const StudentIndexRoute = StudentIndexRouteImport.update({
   path: '/',
   getParentRoute: () => StudentRoute,
 } as any)
+const StudentCartRoute = StudentCartRouteImport.update({
+  id: '/cart',
+  path: '/cart',
+  getParentRoute: () => StudentRoute,
+} as any)
+const StudentCheckoutRoute = StudentCheckoutRouteImport.update({
+  id: '/checkout',
+  path: '/checkout',
+  getParentRoute: () => StudentRoute,
+} as any)
+const StudentFavouritesRoute = StudentFavouritesRouteImport.update({
+  id: '/favourites',
+  path: '/favourites',
+  getParentRoute: () => StudentRoute,
+} as any)
+const StudentNotificationsRoute = StudentNotificationsRouteImport.update({
+  id: '/notifications',
+  path: '/notifications',
+  getParentRoute: () => StudentRoute,
+} as any)
+const StudentProfileRoute = StudentProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => StudentRoute,
+} as any)
 const StudentSearchRoute = StudentSearchRouteImport.update({
   id: '/search',
   path: '/search',
   getParentRoute: () => StudentRoute,
+} as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminCanteensRoute = AdminCanteensRouteImport.update({
+  id: '/canteens',
+  path: '/canteens',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminCategoriesRoute = AdminCategoriesRouteImport.update({
+  id: '/categories',
+  path: '/categories',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminOrdersRoute = AdminOrdersRouteImport.update({
+  id: '/orders',
+  path: '/orders',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminReviewsRoute = AdminReviewsRouteImport.update({
+  id: '/reviews',
+  path: '/reviews',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminSettingsRoute = AdminSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminStudentsRoute = AdminStudentsRouteImport.update({
+  id: '/students',
+  path: '/students',
+  getParentRoute: () => AdminRoute,
+} as any)
+const StaffIndexRoute = StaffIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => StaffRoute,
+} as any)
+const StaffAnalyticsRoute = StaffAnalyticsRouteImport.update({
+  id: '/analytics',
+  path: '/analytics',
+  getParentRoute: () => StaffRoute,
+} as any)
+const StaffMenuRoute = StaffMenuRouteImport.update({
+  id: '/menu',
+  path: '/menu',
+  getParentRoute: () => StaffRoute,
+} as any)
+const StaffOrdersRoute = StaffOrdersRouteImport.update({
+  id: '/orders',
+  path: '/orders',
+  getParentRoute: () => StaffRoute,
+} as any)
+const StaffSettingsRoute = StaffSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => StaffRoute,
 } as any)
 const StudentCanteensIndexRoute = StudentCanteensIndexRouteImport.update({
   id: '/canteens/',
   path: '/canteens/',
   getParentRoute: () => StudentRoute,
 } as any)
+const StudentCanteensCanteenIdRoute =
+  StudentCanteensCanteenIdRouteImport.update({
+    id: '/canteens/$canteenId',
+    path: '/canteens/$canteenId',
+    getParentRoute: () => StudentRoute,
+  } as any)
+const StudentOrderConfirmedOrderIdRoute =
+  StudentOrderConfirmedOrderIdRouteImport.update({
+    id: '/order-confirmed/$orderId',
+    path: '/order-confirmed/$orderId',
+    getParentRoute: () => StudentRoute,
+  } as any)
+const StudentOrdersIndexRoute = StudentOrdersIndexRouteImport.update({
+  id: '/orders/',
+  path: '/orders/',
+  getParentRoute: () => StudentRoute,
+} as any)
+const StudentOrdersOrderIdRoute = StudentOrdersOrderIdRouteImport.update({
+  id: '/orders/$orderId',
+  path: '/orders/$orderId',
+  getParentRoute: () => StudentRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof StudentIndexRoute
+  '/admin': typeof AdminRouteWithChildren
+  '/login': typeof LoginRoute
+  '/signup': typeof SignupRoute
+  '/staff': typeof StaffRouteWithChildren
+  '/cart': typeof StudentCartRoute
+  '/checkout': typeof StudentCheckoutRoute
+  '/favourites': typeof StudentFavouritesRoute
+  '/notifications': typeof StudentNotificationsRoute
+  '/profile': typeof StudentProfileRoute
   '/search': typeof StudentSearchRoute
+  '/admin/canteens': typeof AdminCanteensRoute
+  '/admin/categories': typeof AdminCategoriesRoute
+  '/admin/orders': typeof AdminOrdersRoute
+  '/admin/reviews': typeof AdminReviewsRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admin/students': typeof AdminStudentsRoute
+  '/staff/analytics': typeof StaffAnalyticsRoute
+  '/staff/menu': typeof StaffMenuRoute
+  '/staff/orders': typeof StaffOrdersRoute
+  '/staff/settings': typeof StaffSettingsRoute
+  '/admin/': typeof AdminIndexRoute
+  '/staff/': typeof StaffIndexRoute
+  '/canteens/$canteenId': typeof StudentCanteensCanteenIdRoute
+  '/order-confirmed/$orderId': typeof StudentOrderConfirmedOrderIdRoute
+  '/orders/$orderId': typeof StudentOrdersOrderIdRoute
   '/canteens/': typeof StudentCanteensIndexRoute
+  '/orders/': typeof StudentOrdersIndexRoute
 }
 export interface FileRoutesByTo {
+  '/login': typeof LoginRoute
+  '/signup': typeof SignupRoute
+  '/cart': typeof StudentCartRoute
+  '/checkout': typeof StudentCheckoutRoute
+  '/favourites': typeof StudentFavouritesRoute
+  '/notifications': typeof StudentNotificationsRoute
+  '/profile': typeof StudentProfileRoute
   '/search': typeof StudentSearchRoute
+  '/admin/canteens': typeof AdminCanteensRoute
+  '/admin/categories': typeof AdminCategoriesRoute
+  '/admin/orders': typeof AdminOrdersRoute
+  '/admin/reviews': typeof AdminReviewsRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admin/students': typeof AdminStudentsRoute
+  '/staff/analytics': typeof StaffAnalyticsRoute
+  '/staff/menu': typeof StaffMenuRoute
+  '/staff/orders': typeof StaffOrdersRoute
+  '/staff/settings': typeof StaffSettingsRoute
   '/': typeof StudentIndexRoute
+  '/admin': typeof AdminIndexRoute
+  '/staff': typeof StaffIndexRoute
+  '/canteens/$canteenId': typeof StudentCanteensCanteenIdRoute
+  '/order-confirmed/$orderId': typeof StudentOrderConfirmedOrderIdRoute
+  '/orders/$orderId': typeof StudentOrdersOrderIdRoute
   '/canteens': typeof StudentCanteensIndexRoute
+  '/orders': typeof StudentOrdersIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_student': typeof StudentRouteWithChildren
+  '/admin': typeof AdminRouteWithChildren
+  '/login': typeof LoginRoute
+  '/signup': typeof SignupRoute
+  '/staff': typeof StaffRouteWithChildren
+  '/_student/cart': typeof StudentCartRoute
+  '/_student/checkout': typeof StudentCheckoutRoute
+  '/_student/favourites': typeof StudentFavouritesRoute
+  '/_student/notifications': typeof StudentNotificationsRoute
+  '/_student/profile': typeof StudentProfileRoute
   '/_student/search': typeof StudentSearchRoute
+  '/admin/canteens': typeof AdminCanteensRoute
+  '/admin/categories': typeof AdminCategoriesRoute
+  '/admin/orders': typeof AdminOrdersRoute
+  '/admin/reviews': typeof AdminReviewsRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admin/students': typeof AdminStudentsRoute
+  '/staff/analytics': typeof StaffAnalyticsRoute
+  '/staff/menu': typeof StaffMenuRoute
+  '/staff/orders': typeof StaffOrdersRoute
+  '/staff/settings': typeof StaffSettingsRoute
   '/_student/': typeof StudentIndexRoute
+  '/admin/': typeof AdminIndexRoute
+  '/staff/': typeof StaffIndexRoute
+  '/_student/canteens/$canteenId': typeof StudentCanteensCanteenIdRoute
+  '/_student/order-confirmed/$orderId': typeof StudentOrderConfirmedOrderIdRoute
+  '/_student/orders/$orderId': typeof StudentOrdersOrderIdRoute
   '/_student/canteens/': typeof StudentCanteensIndexRoute
+  '/_student/orders/': typeof StudentOrdersIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/search' | '/canteens/'
+  fullPaths:
+    | '/'
+    | '/admin'
+    | '/login'
+    | '/signup'
+    | '/staff'
+    | '/cart'
+    | '/checkout'
+    | '/favourites'
+    | '/notifications'
+    | '/profile'
+    | '/search'
+    | '/admin/canteens'
+    | '/admin/categories'
+    | '/admin/orders'
+    | '/admin/reviews'
+    | '/admin/settings'
+    | '/admin/students'
+    | '/staff/analytics'
+    | '/staff/menu'
+    | '/staff/orders'
+    | '/staff/settings'
+    | '/admin/'
+    | '/staff/'
+    | '/canteens/$canteenId'
+    | '/order-confirmed/$orderId'
+    | '/orders/$orderId'
+    | '/canteens/'
+    | '/orders/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/search' | '/' | '/canteens'
+  to:
+    | '/login'
+    | '/signup'
+    | '/cart'
+    | '/checkout'
+    | '/favourites'
+    | '/notifications'
+    | '/profile'
+    | '/search'
+    | '/admin/canteens'
+    | '/admin/categories'
+    | '/admin/orders'
+    | '/admin/reviews'
+    | '/admin/settings'
+    | '/admin/students'
+    | '/staff/analytics'
+    | '/staff/menu'
+    | '/staff/orders'
+    | '/staff/settings'
+    | '/'
+    | '/admin'
+    | '/staff'
+    | '/canteens/$canteenId'
+    | '/order-confirmed/$orderId'
+    | '/orders/$orderId'
+    | '/canteens'
+    | '/orders'
   id:
     | '__root__'
     | '/_student'
+    | '/admin'
+    | '/login'
+    | '/signup'
+    | '/staff'
+    | '/_student/cart'
+    | '/_student/checkout'
+    | '/_student/favourites'
+    | '/_student/notifications'
+    | '/_student/profile'
     | '/_student/search'
+    | '/admin/canteens'
+    | '/admin/categories'
+    | '/admin/orders'
+    | '/admin/reviews'
+    | '/admin/settings'
+    | '/admin/students'
+    | '/staff/analytics'
+    | '/staff/menu'
+    | '/staff/orders'
+    | '/staff/settings'
     | '/_student/'
+    | '/admin/'
+    | '/staff/'
+    | '/_student/canteens/$canteenId'
+    | '/_student/order-confirmed/$orderId'
+    | '/_student/orders/$orderId'
     | '/_student/canteens/'
+    | '/_student/orders/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   StudentRoute: typeof StudentRouteWithChildren
+  AdminRoute: typeof AdminRouteWithChildren
+  LoginRoute: typeof LoginRoute
+  SignupRoute: typeof SignupRoute
+  StaffRoute: typeof StaffRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -77,11 +385,74 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StudentRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/signup': {
+      id: '/signup'
+      path: '/signup'
+      fullPath: '/signup'
+      preLoaderRoute: typeof SignupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/staff': {
+      id: '/staff'
+      path: '/staff'
+      fullPath: '/staff'
+      preLoaderRoute: typeof StaffRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_student/': {
       id: '/_student/'
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof StudentIndexRouteImport
+      parentRoute: typeof StudentRoute
+    }
+    '/_student/cart': {
+      id: '/_student/cart'
+      path: '/cart'
+      fullPath: '/cart'
+      preLoaderRoute: typeof StudentCartRouteImport
+      parentRoute: typeof StudentRoute
+    }
+    '/_student/checkout': {
+      id: '/_student/checkout'
+      path: '/checkout'
+      fullPath: '/checkout'
+      preLoaderRoute: typeof StudentCheckoutRouteImport
+      parentRoute: typeof StudentRoute
+    }
+    '/_student/favourites': {
+      id: '/_student/favourites'
+      path: '/favourites'
+      fullPath: '/favourites'
+      preLoaderRoute: typeof StudentFavouritesRouteImport
+      parentRoute: typeof StudentRoute
+    }
+    '/_student/notifications': {
+      id: '/_student/notifications'
+      path: '/notifications'
+      fullPath: '/notifications'
+      preLoaderRoute: typeof StudentNotificationsRouteImport
+      parentRoute: typeof StudentRoute
+    }
+    '/_student/profile': {
+      id: '/_student/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof StudentProfileRouteImport
       parentRoute: typeof StudentRoute
     }
     '/_student/search': {
@@ -91,6 +462,90 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StudentSearchRouteImport
       parentRoute: typeof StudentRoute
     }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/canteens': {
+      id: '/admin/canteens'
+      path: '/canteens'
+      fullPath: '/admin/canteens'
+      preLoaderRoute: typeof AdminCanteensRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/categories': {
+      id: '/admin/categories'
+      path: '/categories'
+      fullPath: '/admin/categories'
+      preLoaderRoute: typeof AdminCategoriesRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/orders': {
+      id: '/admin/orders'
+      path: '/orders'
+      fullPath: '/admin/orders'
+      preLoaderRoute: typeof AdminOrdersRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/reviews': {
+      id: '/admin/reviews'
+      path: '/reviews'
+      fullPath: '/admin/reviews'
+      preLoaderRoute: typeof AdminReviewsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/settings': {
+      id: '/admin/settings'
+      path: '/settings'
+      fullPath: '/admin/settings'
+      preLoaderRoute: typeof AdminSettingsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/students': {
+      id: '/admin/students'
+      path: '/students'
+      fullPath: '/admin/students'
+      preLoaderRoute: typeof AdminStudentsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/staff/': {
+      id: '/staff/'
+      path: '/'
+      fullPath: '/staff/'
+      preLoaderRoute: typeof StaffIndexRouteImport
+      parentRoute: typeof StaffRoute
+    }
+    '/staff/analytics': {
+      id: '/staff/analytics'
+      path: '/analytics'
+      fullPath: '/staff/analytics'
+      preLoaderRoute: typeof StaffAnalyticsRouteImport
+      parentRoute: typeof StaffRoute
+    }
+    '/staff/menu': {
+      id: '/staff/menu'
+      path: '/menu'
+      fullPath: '/staff/menu'
+      preLoaderRoute: typeof StaffMenuRouteImport
+      parentRoute: typeof StaffRoute
+    }
+    '/staff/orders': {
+      id: '/staff/orders'
+      path: '/orders'
+      fullPath: '/staff/orders'
+      preLoaderRoute: typeof StaffOrdersRouteImport
+      parentRoute: typeof StaffRoute
+    }
+    '/staff/settings': {
+      id: '/staff/settings'
+      path: '/settings'
+      fullPath: '/staff/settings'
+      preLoaderRoute: typeof StaffSettingsRouteImport
+      parentRoute: typeof StaffRoute
+    }
     '/_student/canteens/': {
       id: '/_student/canteens/'
       path: '/canteens'
@@ -98,26 +553,116 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StudentCanteensIndexRouteImport
       parentRoute: typeof StudentRoute
     }
+    '/_student/canteens/$canteenId': {
+      id: '/_student/canteens/$canteenId'
+      path: '/canteens/$canteenId'
+      fullPath: '/canteens/$canteenId'
+      preLoaderRoute: typeof StudentCanteensCanteenIdRouteImport
+      parentRoute: typeof StudentRoute
+    }
+    '/_student/order-confirmed/$orderId': {
+      id: '/_student/order-confirmed/$orderId'
+      path: '/order-confirmed/$orderId'
+      fullPath: '/order-confirmed/$orderId'
+      preLoaderRoute: typeof StudentOrderConfirmedOrderIdRouteImport
+      parentRoute: typeof StudentRoute
+    }
+    '/_student/orders/': {
+      id: '/_student/orders/'
+      path: '/orders'
+      fullPath: '/orders/'
+      preLoaderRoute: typeof StudentOrdersIndexRouteImport
+      parentRoute: typeof StudentRoute
+    }
+    '/_student/orders/$orderId': {
+      id: '/_student/orders/$orderId'
+      path: '/orders/$orderId'
+      fullPath: '/orders/$orderId'
+      preLoaderRoute: typeof StudentOrdersOrderIdRouteImport
+      parentRoute: typeof StudentRoute
+    }
   }
 }
 
 interface StudentRouteChildren {
+  StudentCartRoute: typeof StudentCartRoute
+  StudentCheckoutRoute: typeof StudentCheckoutRoute
+  StudentFavouritesRoute: typeof StudentFavouritesRoute
+  StudentNotificationsRoute: typeof StudentNotificationsRoute
+  StudentProfileRoute: typeof StudentProfileRoute
   StudentSearchRoute: typeof StudentSearchRoute
   StudentIndexRoute: typeof StudentIndexRoute
+  StudentCanteensCanteenIdRoute: typeof StudentCanteensCanteenIdRoute
+  StudentOrderConfirmedOrderIdRoute: typeof StudentOrderConfirmedOrderIdRoute
+  StudentOrdersOrderIdRoute: typeof StudentOrdersOrderIdRoute
   StudentCanteensIndexRoute: typeof StudentCanteensIndexRoute
+  StudentOrdersIndexRoute: typeof StudentOrdersIndexRoute
 }
 
 const StudentRouteChildren: StudentRouteChildren = {
+  StudentCartRoute: StudentCartRoute,
+  StudentCheckoutRoute: StudentCheckoutRoute,
+  StudentFavouritesRoute: StudentFavouritesRoute,
+  StudentNotificationsRoute: StudentNotificationsRoute,
+  StudentProfileRoute: StudentProfileRoute,
   StudentSearchRoute: StudentSearchRoute,
   StudentIndexRoute: StudentIndexRoute,
+  StudentCanteensCanteenIdRoute: StudentCanteensCanteenIdRoute,
+  StudentOrderConfirmedOrderIdRoute: StudentOrderConfirmedOrderIdRoute,
+  StudentOrdersOrderIdRoute: StudentOrdersOrderIdRoute,
   StudentCanteensIndexRoute: StudentCanteensIndexRoute,
+  StudentOrdersIndexRoute: StudentOrdersIndexRoute,
 }
 
 const StudentRouteWithChildren =
   StudentRoute._addFileChildren(StudentRouteChildren)
 
+interface AdminRouteChildren {
+  AdminCanteensRoute: typeof AdminCanteensRoute
+  AdminCategoriesRoute: typeof AdminCategoriesRoute
+  AdminOrdersRoute: typeof AdminOrdersRoute
+  AdminReviewsRoute: typeof AdminReviewsRoute
+  AdminSettingsRoute: typeof AdminSettingsRoute
+  AdminStudentsRoute: typeof AdminStudentsRoute
+  AdminIndexRoute: typeof AdminIndexRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminCanteensRoute: AdminCanteensRoute,
+  AdminCategoriesRoute: AdminCategoriesRoute,
+  AdminOrdersRoute: AdminOrdersRoute,
+  AdminReviewsRoute: AdminReviewsRoute,
+  AdminSettingsRoute: AdminSettingsRoute,
+  AdminStudentsRoute: AdminStudentsRoute,
+  AdminIndexRoute: AdminIndexRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
+interface StaffRouteChildren {
+  StaffAnalyticsRoute: typeof StaffAnalyticsRoute
+  StaffMenuRoute: typeof StaffMenuRoute
+  StaffOrdersRoute: typeof StaffOrdersRoute
+  StaffSettingsRoute: typeof StaffSettingsRoute
+  StaffIndexRoute: typeof StaffIndexRoute
+}
+
+const StaffRouteChildren: StaffRouteChildren = {
+  StaffAnalyticsRoute: StaffAnalyticsRoute,
+  StaffMenuRoute: StaffMenuRoute,
+  StaffOrdersRoute: StaffOrdersRoute,
+  StaffSettingsRoute: StaffSettingsRoute,
+  StaffIndexRoute: StaffIndexRoute,
+}
+
+const StaffRouteWithChildren = StaffRoute._addFileChildren(StaffRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   StudentRoute: StudentRouteWithChildren,
+  AdminRoute: AdminRouteWithChildren,
+  LoginRoute: LoginRoute,
+  SignupRoute: SignupRoute,
+  StaffRoute: StaffRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
