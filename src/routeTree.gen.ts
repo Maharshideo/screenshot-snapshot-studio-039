@@ -9,50 +9,115 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
+import { Route as StudentRouteImport } from './routes/_student'
+import { Route as StudentIndexRouteImport } from './routes/_student.index'
+import { Route as StudentSearchRouteImport } from './routes/_student.search'
+import { Route as StudentCanteensIndexRouteImport } from './routes/_student.canteens.index'
 
-const IndexRoute = IndexRouteImport.update({
+const StudentRoute = StudentRouteImport.update({
+  id: '/_student',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StudentIndexRoute = StudentIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => StudentRoute,
+} as any)
+const StudentSearchRoute = StudentSearchRouteImport.update({
+  id: '/search',
+  path: '/search',
+  getParentRoute: () => StudentRoute,
+} as any)
+const StudentCanteensIndexRoute = StudentCanteensIndexRouteImport.update({
+  id: '/canteens/',
+  path: '/canteens/',
+  getParentRoute: () => StudentRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
+  '/': typeof StudentIndexRoute
+  '/search': typeof StudentSearchRoute
+  '/canteens/': typeof StudentCanteensIndexRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
+  '/search': typeof StudentSearchRoute
+  '/': typeof StudentIndexRoute
+  '/canteens': typeof StudentCanteensIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
+  '/_student': typeof StudentRouteWithChildren
+  '/_student/search': typeof StudentSearchRoute
+  '/_student/': typeof StudentIndexRoute
+  '/_student/canteens/': typeof StudentCanteensIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/search' | '/canteens/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/search' | '/' | '/canteens'
+  id:
+    | '__root__'
+    | '/_student'
+    | '/_student/search'
+    | '/_student/'
+    | '/_student/canteens/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
+  StudentRoute: typeof StudentRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
+    '/_student': {
+      id: '/_student'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof StudentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_student/': {
+      id: '/_student/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof StudentIndexRouteImport
+      parentRoute: typeof StudentRoute
+    }
+    '/_student/search': {
+      id: '/_student/search'
+      path: '/search'
+      fullPath: '/search'
+      preLoaderRoute: typeof StudentSearchRouteImport
+      parentRoute: typeof StudentRoute
+    }
+    '/_student/canteens/': {
+      id: '/_student/canteens/'
+      path: '/canteens'
+      fullPath: '/canteens/'
+      preLoaderRoute: typeof StudentCanteensIndexRouteImport
+      parentRoute: typeof StudentRoute
     }
   }
 }
 
+interface StudentRouteChildren {
+  StudentSearchRoute: typeof StudentSearchRoute
+  StudentIndexRoute: typeof StudentIndexRoute
+  StudentCanteensIndexRoute: typeof StudentCanteensIndexRoute
+}
+
+const StudentRouteChildren: StudentRouteChildren = {
+  StudentSearchRoute: StudentSearchRoute,
+  StudentIndexRoute: StudentIndexRoute,
+  StudentCanteensIndexRoute: StudentCanteensIndexRoute,
+}
+
+const StudentRouteWithChildren =
+  StudentRoute._addFileChildren(StudentRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
+  StudentRoute: StudentRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
