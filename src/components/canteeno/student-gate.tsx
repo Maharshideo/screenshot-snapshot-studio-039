@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useRouterState } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 import { LockKeyhole } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -25,6 +25,7 @@ export function PageSkeleton() {
 export function StudentGate({ children, title = "Log in to continue", description }: { children: (user: Student) => ReactNode; title?: string; description?: string }) {
   const hydrated = useHydrated();
   const user = useCurrentStudent();
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
   if (!hydrated) return <PageSkeleton />;
   if (!user)
     return (
@@ -35,7 +36,7 @@ export function StudentGate({ children, title = "Log in to continue", descriptio
         action={
           <div className="flex gap-2">
             <Button asChild>
-              <Link to="/login">Log in</Link>
+              <Link to="/login" search={{ redirect: pathname }}>Log in</Link>
             </Button>
             <Button asChild variant="outline">
               <Link to="/signup">Create account</Link>

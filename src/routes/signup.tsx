@@ -25,7 +25,7 @@ export const Route = createFileRoute("/signup")({
   component: SignupPage,
 });
 
-export const signupSchema = z
+const signupSchema = z
   .object({
     name: z.string().trim().min(2, "Enter your full name").max(60),
     email: z.string().trim().email("Enter a valid email").max(120),

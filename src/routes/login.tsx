@@ -14,6 +14,9 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { useApp } from "@/store/app-store";
 
 export const Route = createFileRoute("/login")({
+  validateSearch: (s: Record<string, unknown>): { redirect?: string } => ({
+    redirect: typeof s.redirect === "string" && s.redirect.startsWith("/") && !s.redirect.startsWith("//") ? s.redirect : undefined,
+  }),
   head: () => ({
     meta: [
       { title: "Log in — Canteeno" },
@@ -41,9 +44,10 @@ function LoginPage() {
   const [serverError, setServerError] = useState<string | null>(null);
   const form = useForm<z.infer<typeof schema>>({ resolver: zodResolver(schema), defaultValues: { email: "", password: "" } });
 
+  const { redirect } = Route.useSearch();
   const finishStudent = () => {
     toast.success("Welcome back!");
-    if (window.history.length > 2 && document.referrer.startsWith(window.location.origin)) router.history.back();
+    if (redirect) router.history.push(redirect);
     else navigate({ to: "/" });
   };
 
