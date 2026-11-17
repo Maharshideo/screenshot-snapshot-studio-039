@@ -21,7 +21,9 @@ import { Route as StudentNotificationsRouteImport } from './routes/_student.noti
 import { Route as StudentProfileRouteImport } from './routes/_student.profile'
 import { Route as StudentSearchRouteImport } from './routes/_student.search'
 import { Route as StaffIndexRouteImport } from './routes/staff.index'
+import { Route as StaffMenuRouteImport } from './routes/staff.menu'
 import { Route as StaffOrdersRouteImport } from './routes/staff.orders'
+import { Route as StaffSettingsRouteImport } from './routes/staff.settings'
 import { Route as StudentCanteensIndexRouteImport } from './routes/_student.canteens.index'
 import { Route as StudentCanteensCanteenIdRouteImport } from './routes/_student.canteens.$canteenId'
 import { Route as StudentOrderConfirmedOrderIdRouteImport } from './routes/_student.order-confirmed.$orderId'
@@ -87,9 +89,19 @@ const StaffIndexRoute = StaffIndexRouteImport.update({
   path: '/',
   getParentRoute: () => StaffRoute,
 } as any)
+const StaffMenuRoute = StaffMenuRouteImport.update({
+  id: '/menu',
+  path: '/menu',
+  getParentRoute: () => StaffRoute,
+} as any)
 const StaffOrdersRoute = StaffOrdersRouteImport.update({
   id: '/orders',
   path: '/orders',
+  getParentRoute: () => StaffRoute,
+} as any)
+const StaffSettingsRoute = StaffSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
   getParentRoute: () => StaffRoute,
 } as any)
 const StudentCanteensIndexRoute = StudentCanteensIndexRouteImport.update({
@@ -131,7 +143,9 @@ export interface FileRoutesByFullPath {
   '/notifications': typeof StudentNotificationsRoute
   '/profile': typeof StudentProfileRoute
   '/search': typeof StudentSearchRoute
+  '/staff/menu': typeof StaffMenuRoute
   '/staff/orders': typeof StaffOrdersRoute
+  '/staff/settings': typeof StaffSettingsRoute
   '/staff/': typeof StaffIndexRoute
   '/canteens/$canteenId': typeof StudentCanteensCanteenIdRoute
   '/order-confirmed/$orderId': typeof StudentOrderConfirmedOrderIdRoute
@@ -148,7 +162,9 @@ export interface FileRoutesByTo {
   '/notifications': typeof StudentNotificationsRoute
   '/profile': typeof StudentProfileRoute
   '/search': typeof StudentSearchRoute
+  '/staff/menu': typeof StaffMenuRoute
   '/staff/orders': typeof StaffOrdersRoute
+  '/staff/settings': typeof StaffSettingsRoute
   '/': typeof StudentIndexRoute
   '/staff': typeof StaffIndexRoute
   '/canteens/$canteenId': typeof StudentCanteensCanteenIdRoute
@@ -169,7 +185,9 @@ export interface FileRoutesById {
   '/_student/notifications': typeof StudentNotificationsRoute
   '/_student/profile': typeof StudentProfileRoute
   '/_student/search': typeof StudentSearchRoute
+  '/staff/menu': typeof StaffMenuRoute
   '/staff/orders': typeof StaffOrdersRoute
+  '/staff/settings': typeof StaffSettingsRoute
   '/_student/': typeof StudentIndexRoute
   '/staff/': typeof StaffIndexRoute
   '/_student/canteens/$canteenId': typeof StudentCanteensCanteenIdRoute
@@ -191,7 +209,9 @@ export interface FileRouteTypes {
     | '/notifications'
     | '/profile'
     | '/search'
+    | '/staff/menu'
     | '/staff/orders'
+    | '/staff/settings'
     | '/staff/'
     | '/canteens/$canteenId'
     | '/order-confirmed/$orderId'
@@ -208,7 +228,9 @@ export interface FileRouteTypes {
     | '/notifications'
     | '/profile'
     | '/search'
+    | '/staff/menu'
     | '/staff/orders'
+    | '/staff/settings'
     | '/'
     | '/staff'
     | '/canteens/$canteenId'
@@ -228,7 +250,9 @@ export interface FileRouteTypes {
     | '/_student/notifications'
     | '/_student/profile'
     | '/_student/search'
+    | '/staff/menu'
     | '/staff/orders'
+    | '/staff/settings'
     | '/_student/'
     | '/staff/'
     | '/_student/canteens/$canteenId'
@@ -331,11 +355,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StaffIndexRouteImport
       parentRoute: typeof StaffRoute
     }
+    '/staff/menu': {
+      id: '/staff/menu'
+      path: '/menu'
+      fullPath: '/staff/menu'
+      preLoaderRoute: typeof StaffMenuRouteImport
+      parentRoute: typeof StaffRoute
+    }
     '/staff/orders': {
       id: '/staff/orders'
       path: '/orders'
       fullPath: '/staff/orders'
       preLoaderRoute: typeof StaffOrdersRouteImport
+      parentRoute: typeof StaffRoute
+    }
+    '/staff/settings': {
+      id: '/staff/settings'
+      path: '/settings'
+      fullPath: '/staff/settings'
+      preLoaderRoute: typeof StaffSettingsRouteImport
       parentRoute: typeof StaffRoute
     }
     '/_student/canteens/': {
@@ -410,12 +448,16 @@ const StudentRouteWithChildren =
   StudentRoute._addFileChildren(StudentRouteChildren)
 
 interface StaffRouteChildren {
+  StaffMenuRoute: typeof StaffMenuRoute
   StaffOrdersRoute: typeof StaffOrdersRoute
+  StaffSettingsRoute: typeof StaffSettingsRoute
   StaffIndexRoute: typeof StaffIndexRoute
 }
 
 const StaffRouteChildren: StaffRouteChildren = {
+  StaffMenuRoute: StaffMenuRoute,
   StaffOrdersRoute: StaffOrdersRoute,
+  StaffSettingsRoute: StaffSettingsRoute,
   StaffIndexRoute: StaffIndexRoute,
 }
 
