@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { ArrowRight, BellRing, ChefHat, Clock, IndianRupee, PackageX, ShoppingBag } from "lucide-react";
 import { useApp } from "@/store/app-store";
-import { formatPrice, isActive } from "@/lib/order-logic";
+import { formatPrice } from "@/lib/order-logic";
 import { DashHeader, Panel, StatCard } from "@/components/dashboard/dashboard-shell";
 import { StaffOrderCard } from "@/components/dashboard/order-card";
 import { OrderDrawer } from "@/components/dashboard/order-drawer";
@@ -92,7 +92,6 @@ function StaffOverview() {
           </Panel>
         </div>
       </div>
-      {orders.filter((o) => isActive(o.status)).length === 0 && null}
       <OrderDrawer orderId={openId} onOpenChange={(o) => !o && setOpenId(null)} />
     </>
   );
