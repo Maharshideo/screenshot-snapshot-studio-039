@@ -16,6 +16,9 @@ import { Route as StudentCheckoutRouteImport } from './routes/_student.checkout'
 import { Route as StudentSearchRouteImport } from './routes/_student.search'
 import { Route as StudentCanteensIndexRouteImport } from './routes/_student.canteens.index'
 import { Route as StudentCanteensCanteenIdRouteImport } from './routes/_student.canteens.$canteenId'
+import { Route as StudentOrderConfirmedOrderIdRouteImport } from './routes/_student.order-confirmed.$orderId'
+import { Route as StudentOrdersIndexRouteImport } from './routes/_student.orders.index'
+import { Route as StudentOrdersOrderIdRouteImport } from './routes/_student.orders.$orderId'
 
 const StudentRoute = StudentRouteImport.update({
   id: '/_student',
@@ -52,6 +55,22 @@ const StudentCanteensCanteenIdRoute =
     path: '/canteens/$canteenId',
     getParentRoute: () => StudentRoute,
   } as any)
+const StudentOrderConfirmedOrderIdRoute =
+  StudentOrderConfirmedOrderIdRouteImport.update({
+    id: '/order-confirmed/$orderId',
+    path: '/order-confirmed/$orderId',
+    getParentRoute: () => StudentRoute,
+  } as any)
+const StudentOrdersIndexRoute = StudentOrdersIndexRouteImport.update({
+  id: '/orders/',
+  path: '/orders/',
+  getParentRoute: () => StudentRoute,
+} as any)
+const StudentOrdersOrderIdRoute = StudentOrdersOrderIdRouteImport.update({
+  id: '/orders/$orderId',
+  path: '/orders/$orderId',
+  getParentRoute: () => StudentRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof StudentIndexRoute
@@ -59,7 +78,10 @@ export interface FileRoutesByFullPath {
   '/checkout': typeof StudentCheckoutRoute
   '/search': typeof StudentSearchRoute
   '/canteens/$canteenId': typeof StudentCanteensCanteenIdRoute
+  '/order-confirmed/$orderId': typeof StudentOrderConfirmedOrderIdRoute
+  '/orders/$orderId': typeof StudentOrdersOrderIdRoute
   '/canteens/': typeof StudentCanteensIndexRoute
+  '/orders/': typeof StudentOrdersIndexRoute
 }
 export interface FileRoutesByTo {
   '/cart': typeof StudentCartRoute
@@ -67,7 +89,10 @@ export interface FileRoutesByTo {
   '/search': typeof StudentSearchRoute
   '/': typeof StudentIndexRoute
   '/canteens/$canteenId': typeof StudentCanteensCanteenIdRoute
+  '/order-confirmed/$orderId': typeof StudentOrderConfirmedOrderIdRoute
+  '/orders/$orderId': typeof StudentOrdersOrderIdRoute
   '/canteens': typeof StudentCanteensIndexRoute
+  '/orders': typeof StudentOrdersIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -77,7 +102,10 @@ export interface FileRoutesById {
   '/_student/search': typeof StudentSearchRoute
   '/_student/': typeof StudentIndexRoute
   '/_student/canteens/$canteenId': typeof StudentCanteensCanteenIdRoute
+  '/_student/order-confirmed/$orderId': typeof StudentOrderConfirmedOrderIdRoute
+  '/_student/orders/$orderId': typeof StudentOrdersOrderIdRoute
   '/_student/canteens/': typeof StudentCanteensIndexRoute
+  '/_student/orders/': typeof StudentOrdersIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -87,7 +115,10 @@ export interface FileRouteTypes {
     | '/checkout'
     | '/search'
     | '/canteens/$canteenId'
+    | '/order-confirmed/$orderId'
+    | '/orders/$orderId'
     | '/canteens/'
+    | '/orders/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/cart'
@@ -95,7 +126,10 @@ export interface FileRouteTypes {
     | '/search'
     | '/'
     | '/canteens/$canteenId'
+    | '/order-confirmed/$orderId'
+    | '/orders/$orderId'
     | '/canteens'
+    | '/orders'
   id:
     | '__root__'
     | '/_student'
@@ -104,7 +138,10 @@ export interface FileRouteTypes {
     | '/_student/search'
     | '/_student/'
     | '/_student/canteens/$canteenId'
+    | '/_student/order-confirmed/$orderId'
+    | '/_student/orders/$orderId'
     | '/_student/canteens/'
+    | '/_student/orders/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -162,6 +199,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StudentCanteensCanteenIdRouteImport
       parentRoute: typeof StudentRoute
     }
+    '/_student/order-confirmed/$orderId': {
+      id: '/_student/order-confirmed/$orderId'
+      path: '/order-confirmed/$orderId'
+      fullPath: '/order-confirmed/$orderId'
+      preLoaderRoute: typeof StudentOrderConfirmedOrderIdRouteImport
+      parentRoute: typeof StudentRoute
+    }
+    '/_student/orders/': {
+      id: '/_student/orders/'
+      path: '/orders'
+      fullPath: '/orders/'
+      preLoaderRoute: typeof StudentOrdersIndexRouteImport
+      parentRoute: typeof StudentRoute
+    }
+    '/_student/orders/$orderId': {
+      id: '/_student/orders/$orderId'
+      path: '/orders/$orderId'
+      fullPath: '/orders/$orderId'
+      preLoaderRoute: typeof StudentOrdersOrderIdRouteImport
+      parentRoute: typeof StudentRoute
+    }
   }
 }
 
@@ -171,7 +229,10 @@ interface StudentRouteChildren {
   StudentSearchRoute: typeof StudentSearchRoute
   StudentIndexRoute: typeof StudentIndexRoute
   StudentCanteensCanteenIdRoute: typeof StudentCanteensCanteenIdRoute
+  StudentOrderConfirmedOrderIdRoute: typeof StudentOrderConfirmedOrderIdRoute
+  StudentOrdersOrderIdRoute: typeof StudentOrdersOrderIdRoute
   StudentCanteensIndexRoute: typeof StudentCanteensIndexRoute
+  StudentOrdersIndexRoute: typeof StudentOrdersIndexRoute
 }
 
 const StudentRouteChildren: StudentRouteChildren = {
@@ -180,7 +241,10 @@ const StudentRouteChildren: StudentRouteChildren = {
   StudentSearchRoute: StudentSearchRoute,
   StudentIndexRoute: StudentIndexRoute,
   StudentCanteensCanteenIdRoute: StudentCanteensCanteenIdRoute,
+  StudentOrderConfirmedOrderIdRoute: StudentOrderConfirmedOrderIdRoute,
+  StudentOrdersOrderIdRoute: StudentOrdersOrderIdRoute,
   StudentCanteensIndexRoute: StudentCanteensIndexRoute,
+  StudentOrdersIndexRoute: StudentOrdersIndexRoute,
 }
 
 const StudentRouteWithChildren =
