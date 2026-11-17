@@ -11,6 +11,8 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as StudentRouteImport } from './routes/_student'
 import { Route as StudentIndexRouteImport } from './routes/_student.index'
+import { Route as StudentCartRouteImport } from './routes/_student.cart'
+import { Route as StudentCheckoutRouteImport } from './routes/_student.checkout'
 import { Route as StudentSearchRouteImport } from './routes/_student.search'
 import { Route as StudentCanteensIndexRouteImport } from './routes/_student.canteens.index'
 import { Route as StudentCanteensCanteenIdRouteImport } from './routes/_student.canteens.$canteenId'
@@ -22,6 +24,16 @@ const StudentRoute = StudentRouteImport.update({
 const StudentIndexRoute = StudentIndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => StudentRoute,
+} as any)
+const StudentCartRoute = StudentCartRouteImport.update({
+  id: '/cart',
+  path: '/cart',
+  getParentRoute: () => StudentRoute,
+} as any)
+const StudentCheckoutRoute = StudentCheckoutRouteImport.update({
+  id: '/checkout',
+  path: '/checkout',
   getParentRoute: () => StudentRoute,
 } as any)
 const StudentSearchRoute = StudentSearchRouteImport.update({
@@ -43,11 +55,15 @@ const StudentCanteensCanteenIdRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof StudentIndexRoute
+  '/cart': typeof StudentCartRoute
+  '/checkout': typeof StudentCheckoutRoute
   '/search': typeof StudentSearchRoute
   '/canteens/$canteenId': typeof StudentCanteensCanteenIdRoute
   '/canteens/': typeof StudentCanteensIndexRoute
 }
 export interface FileRoutesByTo {
+  '/cart': typeof StudentCartRoute
+  '/checkout': typeof StudentCheckoutRoute
   '/search': typeof StudentSearchRoute
   '/': typeof StudentIndexRoute
   '/canteens/$canteenId': typeof StudentCanteensCanteenIdRoute
@@ -56,6 +72,8 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_student': typeof StudentRouteWithChildren
+  '/_student/cart': typeof StudentCartRoute
+  '/_student/checkout': typeof StudentCheckoutRoute
   '/_student/search': typeof StudentSearchRoute
   '/_student/': typeof StudentIndexRoute
   '/_student/canteens/$canteenId': typeof StudentCanteensCanteenIdRoute
@@ -63,12 +81,26 @@ export interface FileRoutesById {
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/search' | '/canteens/$canteenId' | '/canteens/'
+  fullPaths:
+    | '/'
+    | '/cart'
+    | '/checkout'
+    | '/search'
+    | '/canteens/$canteenId'
+    | '/canteens/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/search' | '/' | '/canteens/$canteenId' | '/canteens'
+  to:
+    | '/cart'
+    | '/checkout'
+    | '/search'
+    | '/'
+    | '/canteens/$canteenId'
+    | '/canteens'
   id:
     | '__root__'
     | '/_student'
+    | '/_student/cart'
+    | '/_student/checkout'
     | '/_student/search'
     | '/_student/'
     | '/_student/canteens/$canteenId'
@@ -93,6 +125,20 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof StudentIndexRouteImport
+      parentRoute: typeof StudentRoute
+    }
+    '/_student/cart': {
+      id: '/_student/cart'
+      path: '/cart'
+      fullPath: '/cart'
+      preLoaderRoute: typeof StudentCartRouteImport
+      parentRoute: typeof StudentRoute
+    }
+    '/_student/checkout': {
+      id: '/_student/checkout'
+      path: '/checkout'
+      fullPath: '/checkout'
+      preLoaderRoute: typeof StudentCheckoutRouteImport
       parentRoute: typeof StudentRoute
     }
     '/_student/search': {
@@ -120,6 +166,8 @@ declare module '@tanstack/react-router' {
 }
 
 interface StudentRouteChildren {
+  StudentCartRoute: typeof StudentCartRoute
+  StudentCheckoutRoute: typeof StudentCheckoutRoute
   StudentSearchRoute: typeof StudentSearchRoute
   StudentIndexRoute: typeof StudentIndexRoute
   StudentCanteensCanteenIdRoute: typeof StudentCanteensCanteenIdRoute
@@ -127,6 +175,8 @@ interface StudentRouteChildren {
 }
 
 const StudentRouteChildren: StudentRouteChildren = {
+  StudentCartRoute: StudentCartRoute,
+  StudentCheckoutRoute: StudentCheckoutRoute,
   StudentSearchRoute: StudentSearchRoute,
   StudentIndexRoute: StudentIndexRoute,
   StudentCanteensCanteenIdRoute: StudentCanteensCanteenIdRoute,
