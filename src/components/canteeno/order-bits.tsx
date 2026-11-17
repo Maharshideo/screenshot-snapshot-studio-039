@@ -61,7 +61,7 @@ export function OrderTimeline({ order, orientation = "vertical" }: { order: Orde
             <div className="pt-1.5">
               <p className={cn("font-semibold", !done && "text-muted-foreground")}>{STATUS_LABEL[s]}</p>
               {time && done && <TimeText iso={time} mode="time" className="text-xs text-muted-foreground" />}
-              {current && <p className="text-xs font-medium text-highlight">In progress</p>}
+              {current && <p className="text-xs font-medium text-highlight">{order.status === "ready" ? "Waiting for you at the counter" : "In progress"}</p>}
             </div>
           </li>
         );
