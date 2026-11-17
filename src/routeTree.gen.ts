@@ -10,6 +10,8 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as StudentRouteImport } from './routes/_student'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as SignupRouteImport } from './routes/signup'
 import { Route as StudentIndexRouteImport } from './routes/_student.index'
 import { Route as StudentCartRouteImport } from './routes/_student.cart'
 import { Route as StudentCheckoutRouteImport } from './routes/_student.checkout'
@@ -22,6 +24,16 @@ import { Route as StudentOrdersOrderIdRouteImport } from './routes/_student.orde
 
 const StudentRoute = StudentRouteImport.update({
   id: '/_student',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SignupRoute = SignupRouteImport.update({
+  id: '/signup',
+  path: '/signup',
   getParentRoute: () => rootRouteImport,
 } as any)
 const StudentIndexRoute = StudentIndexRouteImport.update({
@@ -74,6 +86,8 @@ const StudentOrdersOrderIdRoute = StudentOrdersOrderIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof StudentIndexRoute
+  '/login': typeof LoginRoute
+  '/signup': typeof SignupRoute
   '/cart': typeof StudentCartRoute
   '/checkout': typeof StudentCheckoutRoute
   '/search': typeof StudentSearchRoute
@@ -84,6 +98,8 @@ export interface FileRoutesByFullPath {
   '/orders/': typeof StudentOrdersIndexRoute
 }
 export interface FileRoutesByTo {
+  '/login': typeof LoginRoute
+  '/signup': typeof SignupRoute
   '/cart': typeof StudentCartRoute
   '/checkout': typeof StudentCheckoutRoute
   '/search': typeof StudentSearchRoute
@@ -97,6 +113,8 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_student': typeof StudentRouteWithChildren
+  '/login': typeof LoginRoute
+  '/signup': typeof SignupRoute
   '/_student/cart': typeof StudentCartRoute
   '/_student/checkout': typeof StudentCheckoutRoute
   '/_student/search': typeof StudentSearchRoute
@@ -111,6 +129,8 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/login'
+    | '/signup'
     | '/cart'
     | '/checkout'
     | '/search'
@@ -121,6 +141,8 @@ export interface FileRouteTypes {
     | '/orders/'
   fileRoutesByTo: FileRoutesByTo
   to:
+    | '/login'
+    | '/signup'
     | '/cart'
     | '/checkout'
     | '/search'
@@ -133,6 +155,8 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/_student'
+    | '/login'
+    | '/signup'
     | '/_student/cart'
     | '/_student/checkout'
     | '/_student/search'
@@ -146,6 +170,8 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   StudentRoute: typeof StudentRouteWithChildren
+  LoginRoute: typeof LoginRoute
+  SignupRoute: typeof SignupRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -155,6 +181,20 @@ declare module '@tanstack/react-router' {
       path: ''
       fullPath: '/'
       preLoaderRoute: typeof StudentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/signup': {
+      id: '/signup'
+      path: '/signup'
+      fullPath: '/signup'
+      preLoaderRoute: typeof SignupRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_student/': {
@@ -252,6 +292,8 @@ const StudentRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   StudentRoute: StudentRouteWithChildren,
+  LoginRoute: LoginRoute,
+  SignupRoute: SignupRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
