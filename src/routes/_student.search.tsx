@@ -11,12 +11,12 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 
-type SearchParams = { q?: string; cat?: string };
+type SearchParams = { q?: string | undefined; cat?: string | undefined };
 
 export const Route = createFileRoute("/_student/search")({
   validateSearch: (s: Record<string, unknown>): SearchParams => ({
-    q: typeof s.q === "string" && s.q ? s.q : undefined,
-    cat: typeof s.cat === "string" && s.cat ? s.cat : undefined,
+    q: typeof s["q"] === "string" && s["q"] ? s["q"] : undefined,
+    cat: typeof s["cat"] === "string" && s["cat"] ? s["cat"] : undefined,
   }),
   head: () => ({
     meta: [

@@ -7,7 +7,7 @@ import { Label } from "@/components/ui/label";
 import { useApp } from "@/store/app-store";
 import { Stars } from "./bits";
 
-export function ReviewDialog({ canteenId, orderId, trigger }: { canteenId: string; orderId?: string; trigger: ReactNode }) {
+export function ReviewDialog({ canteenId, orderId, trigger }: { canteenId: string; orderId?: string | undefined; trigger: ReactNode }) {
   const [open, setOpen] = useState(false);
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
@@ -27,8 +27,8 @@ export function ReviewDialog({ canteenId, orderId, trigger }: { canteenId: strin
           className="space-y-4"
           onSubmit={(e) => {
             e.preventDefault();
-            if (!rating) return setError("Choose a star rating.");
-            if (comment.trim().length < 5) return setError("Write at least a few words (5+ characters).");
+            if (!rating) return void setError("Choose a star rating.");
+            if (comment.trim().length < 5) return void setError("Write at least a few words (5+ characters).");
             addReview({ canteenId, orderId, rating, comment });
             toast.success("Thanks for your review!");
             setOpen(false);

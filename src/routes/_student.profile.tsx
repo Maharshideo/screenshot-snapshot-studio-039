@@ -76,7 +76,7 @@ function EditProfileDialog({ user }: { user: Student }) {
           className="space-y-3"
           onSubmit={handleSubmit((v) => {
             if (students.some((s) => s.id !== user.id && s.email.toLowerCase() === v.email.toLowerCase()))
-              return setError("email", { message: "Another account uses this email" });
+              return void setError("email", { message: "Another account uses this email" });
             update(v);
             toast.success("Profile updated");
             setOpen(false);
@@ -195,7 +195,7 @@ function Profile({ user }: { user: Student }) {
                       </div>
                       <div className="mt-3 flex items-center justify-between">
                         <span className="font-bold">{formatPrice(o.total)}</span>
-                        <Button size="sm" variant="soft" onClick={() => { const r = reorder(o.id); if (!r.added) return toast.error("Items unavailable right now"); toast.success("Added to cart"); navigate({ to: "/cart" }); }}>
+                        <Button size="sm" variant="soft" onClick={() => { const r = reorder(o.id); if (!r.added) return void toast.error("Items unavailable right now"); toast.success("Added to cart"); navigate({ to: "/cart" }); }}>
                           <RotateCcw /> Reorder
                         </Button>
                       </div>

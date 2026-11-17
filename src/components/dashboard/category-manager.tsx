@@ -74,8 +74,8 @@ export function CategoryManager({ canteenId }: { canteenId?: string }) {
             onSubmit={(e) => {
               e.preventDefault();
               const n = name.trim();
-              if (n.length < 2) return setErr("Name must be at least 2 characters");
-              if (categories.some((c) => c.name.toLowerCase() === n.toLowerCase() && (editing === "new" || c.id !== editing?.id))) return setErr("A category with this name exists");
+              if (n.length < 2) return void setErr("Name must be at least 2 characters");
+              if (categories.some((c) => c.name.toLowerCase() === n.toLowerCase() && (editing === "new" || c.id !== editing?.id))) return void setErr("A category with this name exists");
               upsertCategory(editing === "new" || !editing ? { name: n, icon, active: true } : { ...editing, name: n, icon });
               toast.success(editing === "new" ? `${n} added` : `${n} updated`);
               setEditing(null);

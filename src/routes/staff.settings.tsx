@@ -22,7 +22,7 @@ function StaffSettings() {
   const [hours, setHours] = useState<OpeningHour[]>(canteen.openingHours);
   const [prep, setPrep] = useState(canteen.prepTime);
   const [info, setInfo] = useState({ tagline: canteen.tagline, description: canteen.description, phone: canteen.phone, location: canteen.location });
-  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [errors, setErrors] = useState<Partial<Record<"tagline" | "location" | "phone", string>>>({});
 
   useEffect(() => {
     setHours(canteen.openingHours);
@@ -33,13 +33,13 @@ function StaffSettings() {
 
   const saveHours = () => {
     const bad = hours.find((h) => !h.closed && (!h.open || !h.close || h.open === h.close));
-    if (bad) return toast.error(`Check the hours for ${bad.day}`);
+    if (bad) return void toast.error(`Check the hours for ${bad.day}`);
     patchCanteen(canteen.id, { openingHours: hours });
     toast.success("Opening hours saved");
   };
 
   const saveInfo = () => {
-    const e: Record<string, string> = {};
+    const e: Partial<Record<"tagline" | "location" | "phone", string>> = {};
     if (info.tagline.trim().length < 3) e.tagline = "Add a short tagline";
     if (info.location.trim().length < 3) e.location = "Add a location";
     if (!/^[+\d\s-]{10,16}$/.test(info.phone.trim())) e.phone = "Enter a valid phone";
@@ -68,7 +68,7 @@ function StaffSettings() {
                 <Label className="font-semibold">Average prep time</Label>
                 <span className="font-display text-lg font-bold">{prep} min</span>
               </div>
-              <Slider className="mt-3" min={2} max={45} step={1} value={[prep]} onValueChange={([v]) => setPrep(v)} aria-label="Average prep time" />
+              <Slider className="mt-3" min={2} max={45} step={1} value={[prep]} onValueChange={([v]) => setPrep(v ?? prep)} aria-label="Average prep time" />
               <p className="mt-2 text-xs text-muted-foreground">Shown on canteen cards. Save details below to apply.</p>
             </div>
           </div>

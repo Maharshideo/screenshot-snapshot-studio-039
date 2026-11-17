@@ -71,8 +71,8 @@ function Checkout() {
 
   const submit = () => {
     setError(null);
-    if (when === "later" && !slot) return setError("Pick a pickup time.");
-    if (note.length > 140) return setError("Keep the note under 140 characters.");
+    if (when === "later" && !slot) return void setError("Pick a pickup time.");
+    if (note.length > 140) return void setError("Keep the note under 140 characters.");
     setSubmitting(true);
     // Simulated network delay for the demo
     setTimeout(() => {

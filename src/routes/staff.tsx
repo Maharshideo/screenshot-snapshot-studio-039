@@ -48,7 +48,7 @@ function StaffLayout() {
       ]}
       sidebarExtra={
         <div className="space-y-3 rounded-2xl bg-sidebar-accent p-3">
-          <Select value={canteenId ?? undefined} onValueChange={(v) => { loginStaff(v); toast.success(`Switched to ${canteens.find((c) => c.id === v)?.name}`); }}>
+          <Select value={canteenId ?? ""} onValueChange={(v) => { loginStaff(v); toast.success(`Switched to ${canteens.find((c) => c.id === v)?.name}`); }}>
             <SelectTrigger className="h-9 border-sidebar-border bg-sidebar text-sidebar-accent-foreground" aria-label="Switch canteen (demo)"><SelectValue /></SelectTrigger>
             <SelectContent>{canteens.map((c) => <SelectItem key={c.id} value={c.id}>{c.name}</SelectItem>)}</SelectContent>
           </Select>

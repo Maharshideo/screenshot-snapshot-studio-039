@@ -75,7 +75,7 @@ function AdminReviews() {
           <DialogFooter>
             <Button
               onClick={() => {
-                if (reply.trim().length < 2) return toast.error("Write a reply first");
+                if (reply.trim().length < 2) return void toast.error("Write a reply first");
                 if (replying) patch(replying.id, { reply: reply.trim() });
                 toast.success("Reply saved");
                 setReplying(null);

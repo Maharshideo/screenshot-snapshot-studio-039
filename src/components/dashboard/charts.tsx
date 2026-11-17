@@ -11,7 +11,7 @@ function useMounted() {
   return m;
 }
 
-function ChartBox({ children, height = 260 }: { children: React.ReactElement; height?: number }) {
+function ChartBox({ children, height = 260 }: { children: React.ReactElement; height?: number | undefined }) {
   const mounted = useMounted();
   return <div style={{ height }}>{mounted ? <ResponsiveContainer width="100%" height="100%">{children}</ResponsiveContainer> : <div className="size-full animate-pulse rounded-xl bg-muted" />}</div>;
 }
@@ -74,7 +74,7 @@ export function RevenueChart({ data }: { data: { day: string; revenue: number }[
   );
 }
 
-export function BarsChart({ data, x, y, label, color = "var(--chart-2)", height }: { data: Record<string, string | number>[]; x: string; y: string; label: string; color?: string; height?: number }) {
+export function BarsChart({ data, x, y, label, color = "var(--chart-2)", height }: { data: Record<string, string | number>[]; x: string; y: string; label: string; color?: string; height?: number | undefined }) {
   return (
     <ChartBox height={height}>
       <BarChart data={data} margin={{ left: -20, right: 8, top: 8 }}>

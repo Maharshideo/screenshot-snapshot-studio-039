@@ -28,10 +28,11 @@ function AdminSettings() {
   const settings = useApp((s) => s.settings);
   const { updateSettings, resetDemo, loginAdmin } = useApp.getState();
   const [draft, setDraft] = useState(settings);
-  const [errors, setErrors] = useState<Record<string, string>>({});
+  type ErrKey = "campusName" | "supportEmail" | "maxActiveOrders" | "pickupHoldMinutes";
+  const [errors, setErrors] = useState<Partial<Record<ErrKey, string>>>({});
 
   const save = () => {
-    const e: Record<string, string> = {};
+    const e: Partial<Record<ErrKey, string>> = {};
     if (draft.campusName.trim().length < 2) e.campusName = "Enter a campus name";
     if (!/^\S+@\S+\.\S+$/.test(draft.supportEmail)) e.supportEmail = "Enter a valid email";
     if (!Number.isInteger(draft.maxActiveOrders) || draft.maxActiveOrders < 1 || draft.maxActiveOrders > 10) e.maxActiveOrders = "1–10";

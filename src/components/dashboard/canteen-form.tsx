@@ -10,7 +10,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
 import { useApp } from "@/store/app-store";
-import { images } from "@/data/images";
+import { canteenImage, images } from "@/data/images";
 import { cn } from "@/lib/utils";
 import type { Canteen, OpeningHour } from "@/lib/types";
 
@@ -41,7 +41,7 @@ export function CanteenFormDialog({ open, onOpenChange, canteen }: { open: boole
     reset(
       canteen
         ? { name: canteen.name, code: canteen.code, tagline: canteen.tagline, description: canteen.description, cuisine: canteen.cuisine.join(", "), location: canteen.location, phone: canteen.phone, prepTime: canteen.prepTime, isOpen: canteen.isOpen, featured: canteen.featured, image: canteen.image }
-        : { name: "", code: "", tagline: "", description: "", cuisine: "", location: "", phone: "", prepTime: 10, isOpen: true, featured: false, image: images.canteens[0] },
+        : { name: "", code: "", tagline: "", description: "", cuisine: "", location: "", phone: "", prepTime: 10, isOpen: true, featured: false, image: canteenImage(0) },
     );
   }, [open, canteen, reset]);
 
@@ -59,7 +59,7 @@ export function CanteenFormDialog({ open, onOpenChange, canteen }: { open: boole
           className="space-y-4"
           onSubmit={handleSubmit((raw) => {
             const v = schema.parse(raw);
-            if (canteens.some((c) => c.code === v.code && c.id !== canteen?.id)) return setError("code", { message: "Code already used" });
+            if (canteens.some((c) => c.code === v.code && c.id !== canteen?.id)) return void setError("code", { message: "Code already used" });
             const saved = upsert({
               id: canteen?.id,
               name: v.name,

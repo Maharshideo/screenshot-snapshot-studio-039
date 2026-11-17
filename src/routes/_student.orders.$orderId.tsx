@@ -149,7 +149,7 @@ function OrderDetail({ userId }: { userId: string }) {
                 className="w-full"
                 onClick={() => {
                   const r = reorder(order.id);
-                  if (!r.added) return toast.error("None of these items are available right now.");
+                  if (!r.added) return void toast.error("None of these items are available right now.");
                   toast.success("Items added to cart");
                   navigate({ to: "/cart" });
                 }}

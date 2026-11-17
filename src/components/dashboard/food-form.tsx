@@ -11,7 +11,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useApp } from "@/store/app-store";
-import { categoryImage, fallbackFoodImage, images } from "@/data/images";
+import { fallbackFoodImage, imageForCategory, images } from "@/data/images";
 import { cn } from "@/lib/utils";
 import type { FoodItem } from "@/lib/types";
 
@@ -49,7 +49,8 @@ export function FoodFormDialog({ open, onOpenChange, canteenId, food }: { open: 
   const cat = watch("categoryId");
   const image = watch("image");
   useEffect(() => {
-    if (!imageTouched && cat && categoryImage[cat]) setValue("image", categoryImage[cat]);
+    const img = cat ? imageForCategory(cat) : undefined;
+    if (!imageTouched && img) setValue("image", img);
   }, [cat, imageTouched, setValue]);
 
   return (

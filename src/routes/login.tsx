@@ -14,9 +14,10 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { useApp } from "@/store/app-store";
 
 export const Route = createFileRoute("/login")({
-  validateSearch: (s: Record<string, unknown>): { redirect?: string } => ({
-    redirect: typeof s.redirect === "string" && s.redirect.startsWith("/") && !s.redirect.startsWith("//") ? s.redirect : undefined,
-  }),
+  validateSearch: (s: Record<string, unknown>): { redirect?: string | undefined } => {
+    const r = s["redirect"];
+    return { redirect: typeof r === "string" && r.startsWith("/") && !r.startsWith("//") ? r : undefined };
+  },
   head: () => ({
     meta: [
       { title: "Log in — Canteeno" },
@@ -69,7 +70,7 @@ function LoginPage() {
             onSubmit={form.handleSubmit((v) => {
               setServerError(null);
               const r = loginStudent(v.email, v.password);
-              if (!r.ok) return setServerError(r.error);
+              if (!r.ok) return void setServerError(r.error);
               finishStudent();
             })}
           >

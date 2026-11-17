@@ -1,10 +1,12 @@
-import { Check, ChefHat, ClipboardCheck, PackageCheck, ShoppingBag, X } from "lucide-react";
+import { Check, ChefHat, ClipboardCheck, PackageCheck, ShoppingBag, X, type LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { ORDER_FLOW, STATUS_LABEL } from "@/lib/order-logic";
 import type { Order, OrderStatus } from "@/lib/types";
 import { TimeText } from "./bits";
 
-const ICONS: Record<string, typeof Check> = {
+const ICONS: Record<OrderStatus, LucideIcon> = {
+  cancelled: X,
+  rejected: X,
   placed: ShoppingBag,
   accepted: ClipboardCheck,
   preparing: ChefHat,
@@ -85,7 +87,7 @@ export function PickupCode({ code, size = 168, className }: { code: string; size
   };
   const finder = (x: number, y: number) => {
     const inBox = (ox: number, oy: number) => x >= ox && x < ox + 7 && y >= oy && y < oy + 7;
-    for (const [ox, oy] of [[0, 0], [n - 7, 0], [0, n - 7]]) {
+    for (const [ox, oy] of [[0, 0], [n - 7, 0], [0, n - 7]] as [number, number][]) {
       if (inBox(ox, oy)) {
         const dx = x - ox, dy = y - oy;
         return dx === 0 || dy === 0 || dx === 6 || dy === 6 || (dx >= 2 && dx <= 4 && dy >= 2 && dy <= 4) ? 1 : 0;

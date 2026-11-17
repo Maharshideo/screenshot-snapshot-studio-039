@@ -12,7 +12,7 @@ import type {
   Review,
   Student,
 } from "@/lib/types";
-import { categoryImage, images } from "./images";
+import { canteenImage, fallbackFoodImage, imageForCategory, images } from "./images";
 
 export const seedCategories: Category[] = [
   { id: "chocolates", name: "Chocolates", icon: "candy-bar", active: true },
@@ -38,7 +38,7 @@ type Template = {
   price: number;
   prep: number;
   desc: string;
-  image?: string;
+  image?: string | undefined;
 };
 
 const T: Template[] = [
@@ -95,11 +95,11 @@ const T: Template[] = [
   { slug: "bread-omelette", name: "Bread Omelette", cat: "breakfast", veg: false, price: 40, prep: 6, desc: "Masala omelette sandwiched in toasted bread." },
   // lunch
   { slug: "rajma-chawal", name: "Rajma Chawal", cat: "lunch", veg: true, price: 70, prep: 8, desc: "Kidney bean curry with jeera rice." },
-  { slug: "chole-bhature", name: "Chole Bhature", cat: "lunch", veg: true, price: 70, prep: 10, desc: "Spicy chickpeas with two fluffy bhature.", image: categoryImage.snacks },
+  { slug: "chole-bhature", name: "Chole Bhature", cat: "lunch", veg: true, price: 70, prep: 10, desc: "Spicy chickpeas with two fluffy bhature.", image: images.food.snacks },
   { slug: "fried-rice", name: "Veg Fried Rice", cat: "lunch", veg: true, price: 70, prep: 10, desc: "Wok-tossed rice with vegetables." },
   { slug: "egg-curry-rice", name: "Egg Curry Rice", cat: "lunch", veg: false, price: 80, prep: 8, desc: "Two-egg curry served with steamed rice." },
   // dinner
-  { slug: "paneer-butter", name: "Paneer Butter Masala + 2 Roti", cat: "dinner", veg: true, price: 110, prep: 12, desc: "Creamy tomato gravy with soft paneer.", image: categoryImage.meals },
+  { slug: "paneer-butter", name: "Paneer Butter Masala + 2 Roti", cat: "dinner", veg: true, price: 110, prep: 12, desc: "Creamy tomato gravy with soft paneer.", image: images.food.thali },
   { slug: "chicken-biryani", name: "Chicken Biryani", cat: "dinner", veg: false, price: 140, prep: 15, desc: "Dum-style biryani with raita." },
   { slug: "veg-biryani", name: "Veg Biryani", cat: "dinner", veg: true, price: 100, prep: 12, desc: "Fragrant basmati with mixed vegetables." },
   { slug: "butter-chicken", name: "Butter Chicken + 2 Roti", cat: "dinner", veg: false, price: 150, prep: 15, desc: "Smoky chicken in buttery makhani gravy." },
@@ -133,7 +133,7 @@ const hostel = (letter: string, i: number, extra: Partial<CanteenSpec> = {}): Ca
   description: `The go-to night canteen for Hostel ${letter} residents — Maggi, sandwiches, chai and snacks until late. Demo outlet with placeholder menu and timings.`,
   cuisine: ["Maggi", "Snacks", "Chai"],
   location: `Ground floor, Hostel ${letter}`,
-  image: images.canteens[i % 3],
+  image: canteenImage(i),
   rating: 4.0 + ((i * 7) % 8) / 10,
   ratingCount: 80 + i * 23,
   prepTime: 8 + (i % 4) * 2,
@@ -153,7 +153,7 @@ const specs: CanteenSpec[] = [
     description: "The campus coffee kiosk for between-lecture caffeine, cold coffee and grilled sandwiches. Demo outlet with placeholder menu and timings.",
     cuisine: ["Coffee", "Beverages", "Sandwiches"],
     location: "Near Central Library",
-    image: images.canteens[1],
+    image: canteenImage(1),
     rating: 4.6,
     ratingCount: 512,
     prepTime: 6,
@@ -170,7 +170,7 @@ const specs: CanteenSpec[] = [
     description: "Hearty thalis, rajma chawal and paratha breakfasts — the main mess-style canteen. Demo outlet with placeholder menu and timings.",
     cuisine: ["North Indian", "Thali", "Breakfast"],
     location: "Academic Block, Gate 2",
-    image: images.canteens[0],
+    image: canteenImage(0),
     rating: 4.4,
     ratingCount: 864,
     prepTime: 12,
@@ -196,7 +196,7 @@ const specs: CanteenSpec[] = [
     description: "Known for biryani nights and generous non-veg thalis. Demo outlet with placeholder menu and timings.",
     cuisine: ["Biryani", "Mughlai", "Thali"],
     location: "Near Sports Complex",
-    image: images.canteens[2],
+    image: canteenImage(2),
     rating: 4.5,
     ratingCount: 640,
     prepTime: 15,
@@ -213,7 +213,7 @@ const specs: CanteenSpec[] = [
     description: "Right next to the Lecture Hall Complex — burgers, sandwiches and chai for the 10-minute break. Demo outlet with placeholder menu and timings.",
     cuisine: ["Fast food", "Burgers", "Chai"],
     location: "Lecture Hall Complex",
-    image: images.canteens[0],
+    image: canteenImage(0),
     rating: 4.2,
     ratingCount: 455,
     prepTime: 7,
@@ -230,7 +230,7 @@ const specs: CanteenSpec[] = [
     description: "Crispy dosas, idli, filter coffee and banana-leaf style meals. Demo outlet with placeholder menu and timings.",
     cuisine: ["South Indian", "Tiffin", "Filter coffee"],
     location: "Opposite Main Auditorium",
-    image: images.canteens[2],
+    image: canteenImage(2),
     rating: 4.7,
     ratingCount: 702,
     prepTime: 10,
@@ -269,7 +269,7 @@ export const seedFoods: FoodItem[] = specs.flatMap((spec, ci) =>
       price: t.price + bump,
       categoryId: t.cat,
       isVeg: t.veg,
-      image: t.image ?? categoryImage[t.cat],
+      image: t.image ?? imageForCategory(t.cat) ?? fallbackFoodImage,
       prepTime: t.prep,
       inStock: h % 13 !== 0,
       available: true,

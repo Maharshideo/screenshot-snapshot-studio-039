@@ -18,7 +18,7 @@ import lunch from "@/assets/food-lunch.jpg";
 
 export const images = {
   hero,
-  canteens: [canteen1, canteen2, canteen3],
+  canteens: [canteen1, canteen2, canteen3] as const,
   food: {
     maggi,
     sandwich,
@@ -53,3 +53,6 @@ export const categoryImage: Record<string, string> = {
 };
 
 export const fallbackFoodImage = thali;
+
+export const canteenImage = (i: number): string => images.canteens[i % images.canteens.length] ?? canteen1;
+export const imageForCategory = (id: string): string | undefined => categoryImage[id];

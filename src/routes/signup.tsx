@@ -67,7 +67,7 @@ function SignupPage() {
         onSubmit={handleSubmit((v) => {
           setServerError(null);
           const r = signup({ name: v.name, email: v.email, rollNo: v.rollNo, phone: v.phone, hostel: v.hostel ?? "", password: v.password });
-          if (!r.ok) return setServerError(r.error);
+          if (!r.ok) return void setServerError(r.error);
           toast.success(`Welcome to Canteeno, ${v.name.split(" ")[0]}!`);
           navigate({ to: "/" });
         })}

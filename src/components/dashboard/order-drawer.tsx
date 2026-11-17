@@ -151,7 +151,7 @@ export function OrderDrawer({ orderId, onOpenChange, readOnly = false }: { order
                       onSubmit={(e) => {
                         e.preventDefault();
                         const n = Number(prepDraft);
-                        if (!Number.isFinite(n) || n < 1 || n > 120) return toast.error("Enter 1–120 minutes");
+                        if (!Number.isFinite(n) || n < 1 || n > 120) return void toast.error("Enter 1–120 minutes");
                         setPrep(order.id, Math.round(n));
                         toast.success(`Prep time set to ${Math.round(n)} min`);
                         setPrepDraft("");
