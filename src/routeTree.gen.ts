@@ -13,6 +13,7 @@ import { Route as StudentRouteImport } from './routes/_student'
 import { Route as StudentIndexRouteImport } from './routes/_student.index'
 import { Route as StudentSearchRouteImport } from './routes/_student.search'
 import { Route as StudentCanteensIndexRouteImport } from './routes/_student.canteens.index'
+import { Route as StudentCanteensCanteenIdRouteImport } from './routes/_student.canteens.$canteenId'
 
 const StudentRoute = StudentRouteImport.update({
   id: '/_student',
@@ -33,15 +34,23 @@ const StudentCanteensIndexRoute = StudentCanteensIndexRouteImport.update({
   path: '/canteens/',
   getParentRoute: () => StudentRoute,
 } as any)
+const StudentCanteensCanteenIdRoute =
+  StudentCanteensCanteenIdRouteImport.update({
+    id: '/canteens/$canteenId',
+    path: '/canteens/$canteenId',
+    getParentRoute: () => StudentRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof StudentIndexRoute
   '/search': typeof StudentSearchRoute
+  '/canteens/$canteenId': typeof StudentCanteensCanteenIdRoute
   '/canteens/': typeof StudentCanteensIndexRoute
 }
 export interface FileRoutesByTo {
   '/search': typeof StudentSearchRoute
   '/': typeof StudentIndexRoute
+  '/canteens/$canteenId': typeof StudentCanteensCanteenIdRoute
   '/canteens': typeof StudentCanteensIndexRoute
 }
 export interface FileRoutesById {
@@ -49,18 +58,20 @@ export interface FileRoutesById {
   '/_student': typeof StudentRouteWithChildren
   '/_student/search': typeof StudentSearchRoute
   '/_student/': typeof StudentIndexRoute
+  '/_student/canteens/$canteenId': typeof StudentCanteensCanteenIdRoute
   '/_student/canteens/': typeof StudentCanteensIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/search' | '/canteens/'
+  fullPaths: '/' | '/search' | '/canteens/$canteenId' | '/canteens/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/search' | '/' | '/canteens'
+  to: '/search' | '/' | '/canteens/$canteenId' | '/canteens'
   id:
     | '__root__'
     | '/_student'
     | '/_student/search'
     | '/_student/'
+    | '/_student/canteens/$canteenId'
     | '/_student/canteens/'
   fileRoutesById: FileRoutesById
 }
@@ -98,18 +109,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StudentCanteensIndexRouteImport
       parentRoute: typeof StudentRoute
     }
+    '/_student/canteens/$canteenId': {
+      id: '/_student/canteens/$canteenId'
+      path: '/canteens/$canteenId'
+      fullPath: '/canteens/$canteenId'
+      preLoaderRoute: typeof StudentCanteensCanteenIdRouteImport
+      parentRoute: typeof StudentRoute
+    }
   }
 }
 
 interface StudentRouteChildren {
   StudentSearchRoute: typeof StudentSearchRoute
   StudentIndexRoute: typeof StudentIndexRoute
+  StudentCanteensCanteenIdRoute: typeof StudentCanteensCanteenIdRoute
   StudentCanteensIndexRoute: typeof StudentCanteensIndexRoute
 }
 
 const StudentRouteChildren: StudentRouteChildren = {
   StudentSearchRoute: StudentSearchRoute,
   StudentIndexRoute: StudentIndexRoute,
+  StudentCanteensCanteenIdRoute: StudentCanteensCanteenIdRoute,
   StudentCanteensIndexRoute: StudentCanteensIndexRoute,
 }
 
