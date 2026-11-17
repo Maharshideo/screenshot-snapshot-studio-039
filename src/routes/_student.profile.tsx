@@ -160,11 +160,11 @@ function Profile({ user }: { user: Student }) {
             ))}
           </div>
           <nav className="grid gap-2">
-            {[
+            {([
               { to: "/orders", icon: Receipt, l: "Order history" },
               { to: "/favourites", icon: Heart, l: "Favourites" },
               { to: "/notifications", icon: Bell, l: "Notifications" },
-            ].map((n) => (
+            ] as const).map((n) => (
               <Link key={n.to} to={n.to} className="flex items-center gap-3 rounded-2xl border bg-card px-4 py-3 font-semibold shadow-soft hover:bg-accent">
                 <n.icon className="size-4 text-primary" /> {n.l}
               </Link>

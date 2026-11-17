@@ -1,4 +1,4 @@
-import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
+import { Link, useNavigate, useRouterState, type LinkProps } from "@tanstack/react-router";
 import { useState, type ReactNode } from "react";
 import { ExternalLink, LogOut, Menu, type LucideIcon } from "lucide-react";
 import { toast } from "sonner";
@@ -9,7 +9,7 @@ import { LogoMark } from "@/components/canteeno/logo";
 import { DemoBadge } from "@/components/canteeno/bits";
 import { useApp } from "@/store/app-store";
 
-export type NavItem = { to: string; label: string; icon: LucideIcon; exact?: boolean; badge?: number };
+export type NavItem = { to: NonNullable<LinkProps["to"]>; label: string; icon: LucideIcon; exact?: boolean; badge?: number };
 
 function SidebarContent({ title, subtitle, nav, footer, onNavigate }: { title: string; subtitle: ReactNode; nav: NavItem[]; footer?: ReactNode; onNavigate?: () => void }) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
