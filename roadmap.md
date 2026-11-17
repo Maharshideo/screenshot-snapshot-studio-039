@@ -9,3 +9,4 @@
 - [x] Admin dashboard: overview, canteens, students, orders, categories, reviews, settings
 - [x] Verify flows in browser
 - [x] Answer user: suggest good next steps after the remix
+- [ ] Error sweep across all pages (user request)
