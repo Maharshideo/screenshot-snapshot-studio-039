@@ -15,6 +15,9 @@ import { Route as SignupRouteImport } from './routes/signup'
 import { Route as StudentIndexRouteImport } from './routes/_student.index'
 import { Route as StudentCartRouteImport } from './routes/_student.cart'
 import { Route as StudentCheckoutRouteImport } from './routes/_student.checkout'
+import { Route as StudentFavouritesRouteImport } from './routes/_student.favourites'
+import { Route as StudentNotificationsRouteImport } from './routes/_student.notifications'
+import { Route as StudentProfileRouteImport } from './routes/_student.profile'
 import { Route as StudentSearchRouteImport } from './routes/_student.search'
 import { Route as StudentCanteensIndexRouteImport } from './routes/_student.canteens.index'
 import { Route as StudentCanteensCanteenIdRouteImport } from './routes/_student.canteens.$canteenId'
@@ -49,6 +52,21 @@ const StudentCartRoute = StudentCartRouteImport.update({
 const StudentCheckoutRoute = StudentCheckoutRouteImport.update({
   id: '/checkout',
   path: '/checkout',
+  getParentRoute: () => StudentRoute,
+} as any)
+const StudentFavouritesRoute = StudentFavouritesRouteImport.update({
+  id: '/favourites',
+  path: '/favourites',
+  getParentRoute: () => StudentRoute,
+} as any)
+const StudentNotificationsRoute = StudentNotificationsRouteImport.update({
+  id: '/notifications',
+  path: '/notifications',
+  getParentRoute: () => StudentRoute,
+} as any)
+const StudentProfileRoute = StudentProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
   getParentRoute: () => StudentRoute,
 } as any)
 const StudentSearchRoute = StudentSearchRouteImport.update({
@@ -90,6 +108,9 @@ export interface FileRoutesByFullPath {
   '/signup': typeof SignupRoute
   '/cart': typeof StudentCartRoute
   '/checkout': typeof StudentCheckoutRoute
+  '/favourites': typeof StudentFavouritesRoute
+  '/notifications': typeof StudentNotificationsRoute
+  '/profile': typeof StudentProfileRoute
   '/search': typeof StudentSearchRoute
   '/canteens/$canteenId': typeof StudentCanteensCanteenIdRoute
   '/order-confirmed/$orderId': typeof StudentOrderConfirmedOrderIdRoute
@@ -102,6 +123,9 @@ export interface FileRoutesByTo {
   '/signup': typeof SignupRoute
   '/cart': typeof StudentCartRoute
   '/checkout': typeof StudentCheckoutRoute
+  '/favourites': typeof StudentFavouritesRoute
+  '/notifications': typeof StudentNotificationsRoute
+  '/profile': typeof StudentProfileRoute
   '/search': typeof StudentSearchRoute
   '/': typeof StudentIndexRoute
   '/canteens/$canteenId': typeof StudentCanteensCanteenIdRoute
@@ -117,6 +141,9 @@ export interface FileRoutesById {
   '/signup': typeof SignupRoute
   '/_student/cart': typeof StudentCartRoute
   '/_student/checkout': typeof StudentCheckoutRoute
+  '/_student/favourites': typeof StudentFavouritesRoute
+  '/_student/notifications': typeof StudentNotificationsRoute
+  '/_student/profile': typeof StudentProfileRoute
   '/_student/search': typeof StudentSearchRoute
   '/_student/': typeof StudentIndexRoute
   '/_student/canteens/$canteenId': typeof StudentCanteensCanteenIdRoute
@@ -133,6 +160,9 @@ export interface FileRouteTypes {
     | '/signup'
     | '/cart'
     | '/checkout'
+    | '/favourites'
+    | '/notifications'
+    | '/profile'
     | '/search'
     | '/canteens/$canteenId'
     | '/order-confirmed/$orderId'
@@ -145,6 +175,9 @@ export interface FileRouteTypes {
     | '/signup'
     | '/cart'
     | '/checkout'
+    | '/favourites'
+    | '/notifications'
+    | '/profile'
     | '/search'
     | '/'
     | '/canteens/$canteenId'
@@ -159,6 +192,9 @@ export interface FileRouteTypes {
     | '/signup'
     | '/_student/cart'
     | '/_student/checkout'
+    | '/_student/favourites'
+    | '/_student/notifications'
+    | '/_student/profile'
     | '/_student/search'
     | '/_student/'
     | '/_student/canteens/$canteenId'
@@ -218,6 +254,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StudentCheckoutRouteImport
       parentRoute: typeof StudentRoute
     }
+    '/_student/favourites': {
+      id: '/_student/favourites'
+      path: '/favourites'
+      fullPath: '/favourites'
+      preLoaderRoute: typeof StudentFavouritesRouteImport
+      parentRoute: typeof StudentRoute
+    }
+    '/_student/notifications': {
+      id: '/_student/notifications'
+      path: '/notifications'
+      fullPath: '/notifications'
+      preLoaderRoute: typeof StudentNotificationsRouteImport
+      parentRoute: typeof StudentRoute
+    }
+    '/_student/profile': {
+      id: '/_student/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof StudentProfileRouteImport
+      parentRoute: typeof StudentRoute
+    }
     '/_student/search': {
       id: '/_student/search'
       path: '/search'
@@ -266,6 +323,9 @@ declare module '@tanstack/react-router' {
 interface StudentRouteChildren {
   StudentCartRoute: typeof StudentCartRoute
   StudentCheckoutRoute: typeof StudentCheckoutRoute
+  StudentFavouritesRoute: typeof StudentFavouritesRoute
+  StudentNotificationsRoute: typeof StudentNotificationsRoute
+  StudentProfileRoute: typeof StudentProfileRoute
   StudentSearchRoute: typeof StudentSearchRoute
   StudentIndexRoute: typeof StudentIndexRoute
   StudentCanteensCanteenIdRoute: typeof StudentCanteensCanteenIdRoute
@@ -278,6 +338,9 @@ interface StudentRouteChildren {
 const StudentRouteChildren: StudentRouteChildren = {
   StudentCartRoute: StudentCartRoute,
   StudentCheckoutRoute: StudentCheckoutRoute,
+  StudentFavouritesRoute: StudentFavouritesRoute,
+  StudentNotificationsRoute: StudentNotificationsRoute,
+  StudentProfileRoute: StudentProfileRoute,
   StudentSearchRoute: StudentSearchRoute,
   StudentIndexRoute: StudentIndexRoute,
   StudentCanteensCanteenIdRoute: StudentCanteensCanteenIdRoute,
