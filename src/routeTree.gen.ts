@@ -22,6 +22,12 @@ import { Route as StudentNotificationsRouteImport } from './routes/_student.noti
 import { Route as StudentProfileRouteImport } from './routes/_student.profile'
 import { Route as StudentSearchRouteImport } from './routes/_student.search'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as AdminCanteensRouteImport } from './routes/admin.canteens'
+import { Route as AdminCategoriesRouteImport } from './routes/admin.categories'
+import { Route as AdminOrdersRouteImport } from './routes/admin.orders'
+import { Route as AdminReviewsRouteImport } from './routes/admin.reviews'
+import { Route as AdminSettingsRouteImport } from './routes/admin.settings'
+import { Route as AdminStudentsRouteImport } from './routes/admin.students'
 import { Route as StaffIndexRouteImport } from './routes/staff.index'
 import { Route as StaffAnalyticsRouteImport } from './routes/staff.analytics'
 import { Route as StaffMenuRouteImport } from './routes/staff.menu'
@@ -97,6 +103,36 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminCanteensRoute = AdminCanteensRouteImport.update({
+  id: '/canteens',
+  path: '/canteens',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminCategoriesRoute = AdminCategoriesRouteImport.update({
+  id: '/categories',
+  path: '/categories',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminOrdersRoute = AdminOrdersRouteImport.update({
+  id: '/orders',
+  path: '/orders',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminReviewsRoute = AdminReviewsRouteImport.update({
+  id: '/reviews',
+  path: '/reviews',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminSettingsRoute = AdminSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminStudentsRoute = AdminStudentsRouteImport.update({
+  id: '/students',
+  path: '/students',
+  getParentRoute: () => AdminRoute,
+} as any)
 const StaffIndexRoute = StaffIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -162,6 +198,12 @@ export interface FileRoutesByFullPath {
   '/notifications': typeof StudentNotificationsRoute
   '/profile': typeof StudentProfileRoute
   '/search': typeof StudentSearchRoute
+  '/admin/canteens': typeof AdminCanteensRoute
+  '/admin/categories': typeof AdminCategoriesRoute
+  '/admin/orders': typeof AdminOrdersRoute
+  '/admin/reviews': typeof AdminReviewsRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admin/students': typeof AdminStudentsRoute
   '/staff/analytics': typeof StaffAnalyticsRoute
   '/staff/menu': typeof StaffMenuRoute
   '/staff/orders': typeof StaffOrdersRoute
@@ -183,6 +225,12 @@ export interface FileRoutesByTo {
   '/notifications': typeof StudentNotificationsRoute
   '/profile': typeof StudentProfileRoute
   '/search': typeof StudentSearchRoute
+  '/admin/canteens': typeof AdminCanteensRoute
+  '/admin/categories': typeof AdminCategoriesRoute
+  '/admin/orders': typeof AdminOrdersRoute
+  '/admin/reviews': typeof AdminReviewsRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admin/students': typeof AdminStudentsRoute
   '/staff/analytics': typeof StaffAnalyticsRoute
   '/staff/menu': typeof StaffMenuRoute
   '/staff/orders': typeof StaffOrdersRoute
@@ -209,6 +257,12 @@ export interface FileRoutesById {
   '/_student/notifications': typeof StudentNotificationsRoute
   '/_student/profile': typeof StudentProfileRoute
   '/_student/search': typeof StudentSearchRoute
+  '/admin/canteens': typeof AdminCanteensRoute
+  '/admin/categories': typeof AdminCategoriesRoute
+  '/admin/orders': typeof AdminOrdersRoute
+  '/admin/reviews': typeof AdminReviewsRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admin/students': typeof AdminStudentsRoute
   '/staff/analytics': typeof StaffAnalyticsRoute
   '/staff/menu': typeof StaffMenuRoute
   '/staff/orders': typeof StaffOrdersRoute
@@ -236,6 +290,12 @@ export interface FileRouteTypes {
     | '/notifications'
     | '/profile'
     | '/search'
+    | '/admin/canteens'
+    | '/admin/categories'
+    | '/admin/orders'
+    | '/admin/reviews'
+    | '/admin/settings'
+    | '/admin/students'
     | '/staff/analytics'
     | '/staff/menu'
     | '/staff/orders'
@@ -257,6 +317,12 @@ export interface FileRouteTypes {
     | '/notifications'
     | '/profile'
     | '/search'
+    | '/admin/canteens'
+    | '/admin/categories'
+    | '/admin/orders'
+    | '/admin/reviews'
+    | '/admin/settings'
+    | '/admin/students'
     | '/staff/analytics'
     | '/staff/menu'
     | '/staff/orders'
@@ -282,6 +348,12 @@ export interface FileRouteTypes {
     | '/_student/notifications'
     | '/_student/profile'
     | '/_student/search'
+    | '/admin/canteens'
+    | '/admin/categories'
+    | '/admin/orders'
+    | '/admin/reviews'
+    | '/admin/settings'
+    | '/admin/students'
     | '/staff/analytics'
     | '/staff/menu'
     | '/staff/orders'
@@ -397,6 +469,48 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/canteens': {
+      id: '/admin/canteens'
+      path: '/canteens'
+      fullPath: '/admin/canteens'
+      preLoaderRoute: typeof AdminCanteensRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/categories': {
+      id: '/admin/categories'
+      path: '/categories'
+      fullPath: '/admin/categories'
+      preLoaderRoute: typeof AdminCategoriesRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/orders': {
+      id: '/admin/orders'
+      path: '/orders'
+      fullPath: '/admin/orders'
+      preLoaderRoute: typeof AdminOrdersRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/reviews': {
+      id: '/admin/reviews'
+      path: '/reviews'
+      fullPath: '/admin/reviews'
+      preLoaderRoute: typeof AdminReviewsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/settings': {
+      id: '/admin/settings'
+      path: '/settings'
+      fullPath: '/admin/settings'
+      preLoaderRoute: typeof AdminSettingsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/students': {
+      id: '/admin/students'
+      path: '/students'
+      fullPath: '/admin/students'
+      preLoaderRoute: typeof AdminStudentsRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/staff/': {
       id: '/staff/'
       path: '/'
@@ -504,10 +618,22 @@ const StudentRouteWithChildren =
   StudentRoute._addFileChildren(StudentRouteChildren)
 
 interface AdminRouteChildren {
+  AdminCanteensRoute: typeof AdminCanteensRoute
+  AdminCategoriesRoute: typeof AdminCategoriesRoute
+  AdminOrdersRoute: typeof AdminOrdersRoute
+  AdminReviewsRoute: typeof AdminReviewsRoute
+  AdminSettingsRoute: typeof AdminSettingsRoute
+  AdminStudentsRoute: typeof AdminStudentsRoute
   AdminIndexRoute: typeof AdminIndexRoute
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
+  AdminCanteensRoute: AdminCanteensRoute,
+  AdminCategoriesRoute: AdminCategoriesRoute,
+  AdminOrdersRoute: AdminOrdersRoute,
+  AdminReviewsRoute: AdminReviewsRoute,
+  AdminSettingsRoute: AdminSettingsRoute,
+  AdminStudentsRoute: AdminStudentsRoute,
   AdminIndexRoute: AdminIndexRoute,
 }
 
